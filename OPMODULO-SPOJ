@@ -1,4 +1,4 @@
-OPMODULO - "Operation - Modulo" ---- SPOJ
+"Operation - Modulo"
 we define a function f(n) = (n mod 1) + (n mod 2) + (n mod 3) + ... + (n mod n), 
 where n mod x denotes the remainder when dividing n by x. 
 Rashad interests with integers n such that f(n) = f(n - 1), so he gave Mahmud two numbers L and R, 
