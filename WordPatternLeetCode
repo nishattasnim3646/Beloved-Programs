@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool wordPattern(string pattern, string str) {
+        unordered_map<string, char> wordToChar;
+        unordered_map<char, string> charToWord;
+        istringstream iss(str);
+        string word;
+        int k = 0;
+
+        // Count the number of words in the string
+        int wordCount = 0;
+        while (iss >> word) {
+            wordCount++;
+        }
+        
+        // Check if the pattern length matches the number of words
+        if (pattern.length() != wordCount) {
+            return false;
+        }
+
+        iss.clear(); // Clear the stream state
+        iss.seekg(0); // Reset the stream to the beginning
+
+        while (iss >> word) {
+            char p = pattern[k];
+
+            // Check word to character mapping
+            if (wordToChar.count(word) && wordToChar[word] != p) {
+                return false; // Mismatch
+            }
+            wordToChar[word] = p;
+
+            // Check character to word mapping
+            if (charToWord.count(p) && charToWord[p] != word) {
+                return false; // Mismatch
+            }
+            charToWord[p] = word;
+
+            k++;
+        }
+
+        return true; // All mappings are consistent
+    }
+};
