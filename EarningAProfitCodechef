@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long
+
+int main(){
+    ll t;cin>>t;
+    while(t--){
+        ll n,a;cin>>n>>a;
+        if (n <= 0 || n > 1e6) { 
+            continue; 
+        }
+        vector<ll >c(n+1), d(n+1), pf(n+1);
+        for(ll i=1; i<=n; ++i){
+            cin>>c[i]>>d[i];
+            pf[i] = pf[i-1] + c[i]; 
+        }
+
+        ll optAns = 0;
+        for(ll l=1; l<=n; ++l){
+            ll mini = d[l], maxi = d[l];
+            for(ll r=l; r<=n; ++r){
+                maxi = max(maxi, d[r]);
+                mini = min(mini, d[r]);
+                optAns = max(optAns, ( a*(r-l+1) - (pf[r]-pf[l-1]) - (maxi-mini)*(maxi-mini)));
+            }
+        }
+        cout<<optAns<<'\n';
+    }
+}
